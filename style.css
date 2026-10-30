@@ -1,0 +1,354 @@
+@font-face {
+    font-family: "BookkMyungjo";
+    src: url(fonts/BookkMyungjo_Bold.ttf) format("truetype");
+    font-weight: 700;
+    font-style: normal;}
+@font-face {
+    font-family: "BookkLight";
+    src: url(fonts/BookkMyungjo_Light.ttf) format("truetype");
+    font-weight: 400;
+    font-style: normal;}
+@font-face {
+    font-family: "DreamHeumul";
+    src: url(fonts/DreamHeumulKR.ttf) format("truetype");
+    font-weight: 400;
+    font-style: normal;}
+@font-face {
+    font-family: "Paperlogy";
+    src: url(fonts/Paperlogy-6SemiBold.ttf) format("truetype");
+    font-weight: 700;
+    font-style: normal;}
+
+* {box-sizing: border-box;}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;}
+
+body {
+    background: #10150e;
+    color: #f3f0df;}
+
+#game {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    isolation: isolate;}
+
+#background {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-image: url("image/Chapter0.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;}
+
+#next-background {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+
+    background-image: url("image/Chapter1.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+    pointer-events: none;}
+
+#start-screen {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;}
+
+#start-text {
+    margin: 0;
+    font-family: "DreamHeumul", sans-serif;
+    font-size: 70px;
+    letter-spacing: 30px;
+    font-weight: 400;
+    color: #ffffff;
+    text-align: center;
+    transform: translate(11px, 13px);
+    cursor: pointer;
+    user-select: none;
+    filter: none;}
+
+/* intro text 사라지는 효과 */
+#start-text.disappear {
+    filter: url("#wave-filter");
+    animation: waveFade 3s ease-in-out forwards;}
+
+@keyframes waveFade {
+    0% {
+        opacity: 1;
+        filter: url("#wave-filter");}
+    20% {
+        opacity: 0.8;}
+    40% {
+        opacity: 0.7;}
+    60% {
+        opacity: 1;}
+    100% {
+        opacity: 0;}
+}
+
+/* chapter 1 */
+#branch-choices {
+    position: relative;
+    width: 80%;
+    height: 65%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 0;}
+
+.branch-choice {
+    display: none;
+    position: relative;
+    margin: 0;
+
+    font-family: "BookkMyungjo", sans-serif;
+    font-size: 40px;
+    color: rgba(255, 255, 255, 1);
+
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+
+    transition:
+        color 0.4s ease,
+        text-shadow 0.4s ease,
+        transform 0.4s ease;}
+
+#story-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10%;
+    font-family: "BookkMyungjo", sans-serif;
+    font-size: 28px;
+    line-height: 1.8;
+    color: white;
+    text-align: center;
+    white-space: pre-line;}
+
+#branch-screen {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;}
+
+#branch-screen.hidden {
+    display: none;}
+
+#branch-screen.visible {
+    opacity: 1;}
+
+/* 분기점-1 */
+.branch-choice.show {
+    display: block;
+    animation: choiceAppear 1.6s cubic-bezier(0.22, 1, 0.36, 1) both;}
+
+/* 배치 */
+.branch-choice:nth-child(1) {
+    align-self: flex-start;
+    margin-left: 5%;}
+
+.branch-choice:nth-child(2) {
+    align-self: flex-end;
+    margin-right: 3%;}
+
+.branch-choice:nth-child(3) {
+    align-self: center;
+    transform: translateX(-10%);}
+
+.branch-choice:nth-child(4) {
+    align-self: flex-end;
+    margin-right: 10%;}
+
+.branch-choice:nth-child(5) {
+    align-self: flex-start;
+    margin-left: 12%;}
+
+/* 마우스 상호작용 */
+.branch-choice:hover {
+    color: #ffffff;
+    text-shadow:
+        0 0 8px rgba(255, 255, 255, 0.8),
+        0 0 20px rgba(220, 230, 255, 0.5);
+
+    translate: 0 -5px;
+    animation: choiceFloat 0.5s ease-in-out infinite;}
+
+/* 선택지 움직임 */
+@keyframes choiceFloat {
+    0%, 100% {
+        translate: 0 -5px;}
+
+    50% {
+        translate: 0 -10px;}
+}
+
+/* 등장 */
+@keyframes choiceAppear {
+    from {
+        opacity: 0.5;
+        filter: blur(8px);
+        translate: 0 12px;}
+
+    60% {
+        opacity: 0.7;
+        filter: blur(2px);}
+
+    to {
+        opacity: 1;
+        filter: blur(0);
+        translate: 0 0;}
+}
+
+.hidden {
+    display: none !important;}
+
+#story-heading {
+    display: block;
+    font-size: 30px;
+    font-family: "Paperlogy", sans-serif;
+    color: #d8e6c1;
+    margin-bottom: 24px;
+    text-shadow:
+        0 0 8px rgba(255, 255, 255, 3),}
+
+#story-body {
+    display: block;
+    font-size: 25px;
+    font-family: "BookkLight", sans-serif;
+    line-height: 2;
+    color: #ffffff;}
+
+/* 제목 본문 배치 */
+#story-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10%;
+    font-size: 28px;
+    line-height: 1.8;
+    color: white;
+    text-align: center;
+    white-space: pre-line;}
+
+/* 계속하기 */
+#continue-button {
+    flex-shrink: 0;
+    margin-top: 20px;
+
+    padding: 12px 28px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: transparent;
+    color: white;
+
+    font-family: "BookkMyungjo", sans-serif;
+    font-size: 20px;
+    cursor: pointer;
+
+    opacity: 0;
+    animation: continueAppear 1s ease forwards;}
+
+#continue-button:hover {
+    background: rgba(255, 255, 255, 0.12);}
+
+@keyframes continueAppear {
+    from {
+        opacity: 0;
+        translate: 0 8px;}
+
+    to {
+        opacity: 1;
+        translate: 0 0;}
+}
+
+#continue-button:hover {
+    background: rgba(255, 255, 255, 0.12);}
+
+@keyframes continueAppear {
+    from {
+        opacity: 0;
+        translate: 0 8px;}
+    to {
+        opacity: 1;
+        translate: 0 0;}
+}
+
+/* 스토리 박스 */
+#story-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 60%;
+    height: 65%;
+    box-sizing: border-box;
+
+    padding: 30px 36px;
+
+    background: rgba(0, 0, 0, 0.55);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    z-index: 5;}
+
+/* 스토리 텍스트 영역 */
+#story-text {
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    box-sizing: border-box;
+
+    color: white;
+    font-size: 20px;
+    line-height: 1.9;
+
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.4) transparent;}
+
+/* 스크롤 */
+#story-text::-webkit-scrollbar {
+    width: 5px;}
+
+#story-text::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 10px;}
+
+/* 숨김 처리 */
+#story-container.hidden {
+    display: none !important;}
