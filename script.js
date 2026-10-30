@@ -98,7 +98,7 @@ function showChapterChoices() {
 
     currentChoice = 0;
 
-    // 현재 챕터의 선택지 문구 적용
+    // 현재 챕터 선택지 문구
     const storyKeys = Object.keys(chapters[currentChapter].stories);
 
     choices.forEach((choice, index) => {
@@ -198,7 +198,7 @@ branchChoices.addEventListener("click", (event) => {
             return;
         }
 
-        // 제목을 다 출력하면 본문 출력
+        // 제목 다 출력하면 본문 출력
         if (target === heading) {
             target = body;
             text = remainingText;
