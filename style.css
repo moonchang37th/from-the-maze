@@ -133,18 +133,24 @@ body {
         transform 0.4s ease;}
 
 #story-text {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    position: static;
+    display: block;
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    box-sizing: border-box;
     padding: 8% 10% 6%;
-    font-family: "BookkMyungjo", sans-serif;
-    font-size: 28px;
-    line-height: 1.8;
+    overflow-y: auto;
+    overflow-x: hidden;
     color: white;
+    font-size: 20px;
+    line-height: 1.9;
     text-align: center;
-    white-space: pre-line;}
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.4) transparent;}
 
 #branch-screen {
     position: absolute;
