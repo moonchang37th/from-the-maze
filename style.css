@@ -73,7 +73,7 @@ body {
 #start-text {
     margin: 0;
     font-family: "DreamHeumul", sans-serif;
-    font-size: 70px;
+    font-size: 60px;
     letter-spacing: 30px;
     font-weight: 400;
     color: #ffffff;
@@ -118,8 +118,8 @@ body {
     position: relative;
     margin: 0;
 
-    font-family: "BookkMyungjo", sans-serif;
-    font-size: 40px;
+    font-family: "Paperlogy", sans-serif;
+    font-size: 30px;
     color: rgba(255, 255, 255, 1);
 
     cursor: pointer;
