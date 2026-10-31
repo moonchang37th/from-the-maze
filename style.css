@@ -323,32 +323,42 @@ body {
 
 /* 스토리 텍스트 영역 */
 #story-text {
+    position: static;
     width: 100%;
     flex: 1;
     min-height: 0;
 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 10%;
+    box-sizing: border-box;
+
     overflow-y: auto;
     overflow-x: hidden;
-
-    box-sizing: border-box;
 
     color: white;
     font-size: 20px;
     line-height: 1.9;
-
+    text-align: center;
     white-space: pre-line;
     overflow-wrap: anywhere;
 
     scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.4) transparent;}
+    scrollbar-color: rgba(255, 255, 255, 0.4) transparent;
+}
 
 /* 스크롤 */
 #story-text::-webkit-scrollbar {
-    width: 5px;}
+    width: 5px;
+}
 
 #story-text::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.4);
-    border-radius: 10px;}
+    border-radius: 10px;
+}
 
 /* 숨김 처리 */
 #story-container.hidden {
