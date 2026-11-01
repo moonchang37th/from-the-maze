@@ -11,6 +11,7 @@ const choices = document.querySelectorAll(".branch-choice");
 const typingSpeed = 70;
 const choiceInterval = 800;
 const backgroundTransitionTime = 2000;
+const selectedChoices = [];
 
 let started = false;
 let currentChapter = 1;
@@ -151,6 +152,10 @@ branchChoices.addEventListener("click", (event) => {
     if (choice.style.display === "none") return;
 
     const selectedText = choice.textContent.trim();
+    selectedChoices.push({
+    chapter: currentChapter,
+    text: selectedText
+    });
     const currentStories = chapters[currentChapter].stories;
     const story = currentStories[selectedText];
 
@@ -227,11 +232,12 @@ continueButton.addEventListener("click", () => {
 
     // Chapter 9 마지막
     if (currentChapter >= 9) {
-        return;
+    showEnding();
+    return;
     }
 
     goToNextChapter();
-});
+    });
 
 // 다음 챕터 전환
 function goToNextChapter() {
@@ -277,4 +283,36 @@ function goToNextChapter() {
             showChapterChoices();
         }, backgroundTransitionTime);
     }, 1000);
+}
+
+// 엔딩 화면 표시
+function showEnding() {
+    clearTimeout(choiceTimer);
+    clearInterval(typingTimer);
+
+    branchChoices.style.display = "none";
+    continueButton.classList.add("hidden");
+
+    storyText.replaceChildren();
+
+    const heading = document.createElement("div");
+    heading.id = "story-heading";
+    heading.textContent = "END";
+
+    const body = document.createElement("div");
+    body.id = "story-body";
+
+    selectedChoices.forEach((choice) => {
+        const item = document.createElement("p");
+
+        item.textContent =
+            `Chapter ${choice.chapter}. ${choice.text}`;
+
+        body.appendChild(item);
+    });
+
+    storyText.appendChild(heading);
+    storyText.appendChild(body);
+
+    storyContainer.style.opacity = "1";
 }
