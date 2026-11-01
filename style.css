@@ -147,7 +147,8 @@ body {
     line-height: 1.9;
     text-align: center;
     white-space: pre-line;
-    overflow-wrap: anywhere;
+    word-break: keep-all;
+    overflow-wrap: break-word;
 
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 255, 255, 0.4) transparent;}
