@@ -367,6 +367,11 @@ body {
     border-radius: 10px;
 }
 
-/* 숨김 처리 */
+/* 숨김 */
 #story-container.hidden {
     display: none !important;}
+
+/* 엔딩 */
+#story-body p {
+    margin: 18px 0;
+}
