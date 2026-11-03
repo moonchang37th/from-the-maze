@@ -283,13 +283,22 @@ body {
 #story-body {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 100%;
     flex: 1;
     min-height: 0;
     overflow-y: auto;
     overflow-x: hidden;
+    font-size: 22px;
+    font-family: "BookkLight", sans-serif;
+    line-height: 2;
+    color: #ffffff;
+    align-items: center;
     text-align: left;
+    white-space: pre-line;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.4) transparent;
 }
 
 #story-body p {
