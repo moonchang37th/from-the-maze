@@ -6,6 +6,8 @@ const branchScreen = document.getElementById("branch-screen");
 const branchChoices = document.getElementById("branch-choices");
 const storyHeading = document.getElementById("story-heading");
 const storyBody = document.getElementById("story-body");
+const storyContent = document.getElementById("story-content");
+const storyText = document.getElementById("story-text");
 const continueButton = document.getElementById("continue-button");
 const restartButton = document.getElementById("restart-button");
 const storyContainer = document.getElementById("story-container");
@@ -144,8 +146,11 @@ function showChapterChoices() {
     storyContainer.classList.add("hidden");
     continueButton.classList.add("hidden");
     restartButton.classList.add("hidden");
+
     storyHeading.textContent = "";
-    storyBody.replaceChildren();
+    storyText.textContent = "";
+
+    branchChoices.style.display = "";
     branchChoices.classList.remove("hidden");
     branchScreen.classList.remove("hidden");
 
@@ -203,10 +208,8 @@ branchChoices.addEventListener("click", (event) => {
     continueButton.classList.add("hidden");
     restartButton.classList.add("hidden");
 
-    // 기존 HTML 요소 사용
     storyHeading.textContent = "";
-    storyBody.textContent = "";
-
+    storyText.textContent = "";
     storyBody.scrollTop = 0;
 
     const lines = story.split("\n");
@@ -232,7 +235,7 @@ branchChoices.addEventListener("click", (event) => {
 
         // 제목 출력 완료 후 본문 출력
         if (target === storyHeading) {
-            target = storyBody;
+            target = storyText;
             text = remainingText;
             index = 0;
 
@@ -263,7 +266,9 @@ storyContainer.addEventListener("click", (event) => {
     clearInterval(typingTimer);
 
     storyHeading.textContent = currentFullStory.heading;
-    storyBody.textContent = currentFullStory.body;
+    storyText.textContent = currentFullStory.body;
+
+    storyBody.scrollTop = 0;
 
     isTyping = false;
     continueButton.classList.remove("hidden");
@@ -336,7 +341,11 @@ function showEnding() {
     continueButton.classList.add("hidden");
 
     storyHeading.textContent = "END. 당신이 선택한 이야기";
-    storyBody.replaceChildren();
+
+    storyContent.replaceChildren();
+
+    const endingList = document.createElement("div");
+    endingList.id = "ending-list";
 
     selectedChoices.forEach((choice) => {
         const item = document.createElement("p");
@@ -344,8 +353,10 @@ function showEnding() {
         item.textContent =
             `Chapter ${choice.chapter}. ${choice.text}`;
 
-        storyBody.appendChild(item);
+        endingList.appendChild(item);
     });
+
+    storyContent.appendChild(endingList);
 
     storyBody.scrollTop = 0;
     storyContainer.style.opacity = "1";
