@@ -193,9 +193,13 @@ branchChoices.addEventListener("click", (event) => {
     if (!story) return;
 
     // 선택 기록
+    const lines = story.split("\n");
+
     selectedChoices.push({
-        chapter: currentChapter,
-        text: selectedText
+    chapter: currentChapter,
+    text: selectedText,
+    heading: lines[0],
+    body: lines.slice(1).join("\n")
     });
 
     clearTimeout(choiceTimer);
@@ -348,10 +352,29 @@ function showEnding() {
     endingList.id = "ending-list";
 
     selectedChoices.forEach((choice) => {
-        const item = document.createElement("p");
+        const item = document.createElement("details");
+        item.className = "ending-item";
 
-        item.textContent =
+        const summary = document.createElement("summary");
+        summary.textContent =
             `Chapter ${choice.chapter}. ${choice.text}`;
+
+        const content = document.createElement("div");
+        content.className = "ending-story";
+
+        const heading = document.createElement("p");
+        heading.className = "ending-story-heading";
+        heading.textContent = choice.heading;
+
+        const body = document.createElement("p");
+        body.className = "ending-story-body";
+        body.textContent = choice.body;
+
+        content.appendChild(heading);
+        content.appendChild(body);
+
+        item.appendChild(summary);
+        item.appendChild(content);
 
         endingList.appendChild(item);
     });
@@ -368,3 +391,63 @@ function showEnding() {
 restartButton.addEventListener("click", () => {
     location.reload();
 });
+
+/* 엔딩 선택지 목록 */
+#ending-list {
+    width: fit-content;
+    max-width: 100%;
+    text-align: left;
+}
+
+/* 접히는 항목 */
+.ending-item {
+    margin: 14px 0;
+    color: white;
+    font-family: "BookkLight";
+    font-size: 20px;
+    line-height: 1.8;
+}
+
+/* 화살표와 선택지 */
+.ending-item summary {
+    cursor: pointer;
+    list-style: none;
+    transition: color 0.2s ease;
+}
+
+.ending-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.ending-item summary::before {
+    content: "›";
+    display: inline-block;
+    margin-right: 12px;
+    transition: transform 0.2s ease;
+}
+
+.ending-item[open] summary::before {
+    transform: rotate(90deg);
+}
+
+.ending-item summary:hover {
+    color: #cbd9c2;
+}
+
+/* 펼쳐지는 본문 */
+.ending-story {
+    padding: 12px 0 8px 28px;
+}
+
+.ending-story-heading {
+    margin: 0 0 12px;
+    font-family: "Paperlogy";
+    color: #cbd9c2;
+}
+
+.ending-story-body {
+    margin: 0;
+    white-space: pre-line;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+}
