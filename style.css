@@ -272,7 +272,7 @@ body {
     font-family: "Paperlogy", sans-serif;
     text-align: center;
     color: #d8e6c1;
-    margin-top: 27px;
+    margin-top: 25px;
     margin-bottom: 20px;
     line-height: 1.5;
     overflow-wrap: break-word;
@@ -287,7 +287,7 @@ body {
     min-height: 0;
     overflow-y: auto;
     overflow-x: hidden;
-    font-size: 24px;
+    font-size: 22px;
     font-family: "BookkLight", sans-serif;
     line-height: 2;
     color: #ffffff;
@@ -367,5 +367,142 @@ body {
     to {
         opacity: 1;
         translate: 0 0;
+    }
+}
+
+/* 모바일 화면 */
+@media screen and (max-width: 768px) {
+
+    /* 시작 문구 */
+    #start-text {
+        font-size: clamp(20px, 5vw, 32px);
+        letter-spacing: clamp(4px, 1.5vw, 10px);
+        transform: none;
+        padding: 0 15px;
+    }
+
+    /* 선택지 영역 */
+    #branch-choices {
+        width: 90%;
+        height: 75%;
+        justify-content: space-evenly;
+        gap: 14px;
+    }
+
+    /* 선택지 */
+    .branch-choice,
+    .branch-choice:nth-child(n) {
+        align-self: center;
+        margin: 0;
+        max-width: 90%;
+        font-size: clamp(16px, 3.8vw, 22px);
+        letter-spacing: 0.5px;
+        white-space: normal;
+        text-align: center;
+        transform: none;
+    }
+
+    /* 스토리 박스 */
+    #story-container {
+        width: 90%;
+        height: 82%;
+        padding: 18px 18px;
+    }
+
+    /* 스토리 제목 */
+    #story-heading {
+        margin-top: 12px;
+        margin-bottom: 14px;
+        font-size: 20px;
+    }
+
+    /* 스토리 본문 */
+    #story-body {
+        font-size: 18px;
+        line-height: 1.8;
+    }
+
+    /* 본문 텍스트 */
+    #story-text {
+        width: fit-content;
+        max-width: 100%;
+    }
+
+    /* 엔딩 목록 */
+    #ending-list {
+        max-width: 100%;
+        font-size: 17px;
+    }
+
+    #ending-list p {
+        margin: 10px 0;
+    }
+
+    /* 버튼 */
+    #continue-button,
+    #restart-button {
+        margin-top: 14px;
+        padding: 10px 20px;
+        font-size: 17px;
+    }
+}
+
+/* 모바일 가로 화면 */
+@media screen and (max-width: 900px) and (max-height: 500px) {
+
+    #start-text {
+        font-size: 28px;
+        letter-spacing: 8px;
+    }
+
+    #branch-choices {
+        width: 90%;
+        height: 85%;
+        gap: 8px;
+    }
+
+    .branch-choice,
+    .branch-choice:nth-child(n) {
+        font-size: clamp(14px, 2.5vw, 20px);
+    }
+
+    #story-container {
+        width: 85%;
+        height: 90%;
+        padding: 10px 24px;
+    }
+
+    #story-heading {
+        margin-top: 5px;
+        margin-bottom: 8px;
+        font-size: 19px;
+    }
+
+    #story-body {
+        font-size: 16px;
+        line-height: 1.7;
+    }
+
+    #continue-button,
+    #restart-button {
+        margin-top: 8px;
+        padding: 7px 18px;
+        font-size: 15px;
+    }
+}
+
+/* 터치 화면에서 hover 효과 조정 */
+@media (hover: none) {
+    .branch-choice:hover {
+        animation: none;
+        translate: none;
+        text-shadow: none;
+    }
+
+    .branch-choice:active {
+        color: #ffffff;
+        text-shadow:
+            0 0 8px rgba(255, 255, 255, 0.8),
+            0 0 20px rgba(220, 230, 255, 0.5);
     }
 }
