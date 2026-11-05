@@ -216,7 +216,6 @@ branchChoices.addEventListener("click", (event) => {
     storyText.textContent = "";
     storyBody.scrollTop = 0;
 
-    const lines = story.split("\n");
     const firstLine = lines[0];
     const remainingText = lines.slice(1).join("\n");
 
