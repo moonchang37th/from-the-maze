@@ -392,16 +392,19 @@ body {
     /* 선택지 */
     .branch-choice,
     .branch-choice:nth-child(n) {
-        align-self: center;
-        margin: 0;
-        max-width: 90%;
-        font-size: clamp(16px, 3.8vw, 22px);
-        letter-spacing: 0.5px;
-        white-space: normal;
-        text-align: center;
-        transform: none;
-    }
+    font-size: clamp(16px, 3.8vw, 22px);
+    letter-spacing: 0.5px;
+    white-space: normal;
+    text-align: center;
+    transform: none;
+}
 
+/* 엔딩 선택지 목록 */
+#ending-list {
+    align-self: center;
+    margin: 0;
+    max-width: 90%;
+}
     /* 스토리 박스 */
     #story-container {
         width: 90%;
