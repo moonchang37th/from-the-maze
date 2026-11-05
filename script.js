@@ -1,4 +1,4 @@
-const startScreen = document.getElementById("start-screen");
+const startScreen = document.getElementById("start-screen"); 
 const startText = document.getElementById("start-text");
 const background = document.getElementById("background");
 const nextBackground = document.getElementById("next-background");
