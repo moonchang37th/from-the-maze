@@ -1,4 +1,4 @@
-const startScreen = document.getElementById("start-screen"); 
+const startScreen = document.getElementById("start-screen");
 const startText = document.getElementById("start-text");
 const background = document.getElementById("background");
 const nextBackground = document.getElementById("next-background");
@@ -16,6 +16,7 @@ const choices = document.querySelectorAll(".branch-choice");
 const typingSpeed = 70;
 const choiceInterval = 800;
 const backgroundTransitionTime = 2000;
+
 const selectedChoices = [];
 
 let started = false;
@@ -32,7 +33,7 @@ let currentFullStory = {
     body: ""
 };
 
-// 배경 스토리 연결
+// 챕터 스토리 연결
 const chapters = {
     1: {
         background: "image/bifurcation12.png",
@@ -161,21 +162,21 @@ function showChapterChoices() {
     choiceTimer = setTimeout(showNextChoice, 600);
 }
 
+// 선택지 순서대로 등장
 function showNextChoice() {
     if (currentChoice >= choices.length) return;
 
     const choice = choices[currentChoice];
 
-    if (choice.style.display === "none") {
-        currentChoice++;
-        choiceTimer = setTimeout(showNextChoice, choiceInterval);
-        return;
+    if (choice.style.display !== "none") {
+        choice.classList.add("show");
     }
 
-    choice.classList.add("show");
     currentChoice++;
 
-    choiceTimer = setTimeout(showNextChoice, choiceInterval);
+    if (currentChoice < choices.length) {
+        choiceTimer = setTimeout(showNextChoice, choiceInterval);
+    }
 }
 
 // 선택지 클릭
@@ -196,14 +197,15 @@ branchChoices.addEventListener("click", (event) => {
     const lines = story.split("\n");
 
     selectedChoices.push({
-    chapter: currentChapter,
-    text: selectedText,
-    heading: lines[0],
-    body: lines.slice(1).join("\n")
+        chapter: currentChapter,
+        text: selectedText,
+        heading: lines[0],
+        body: lines.slice(1).join("\n")
     });
 
     clearTimeout(choiceTimer);
     clearInterval(typingTimer);
+
     isTyping = false;
 
     branchChoices.classList.add("hidden");
@@ -214,6 +216,7 @@ branchChoices.addEventListener("click", (event) => {
 
     storyHeading.textContent = "";
     storyText.textContent = "";
+
     storyBody.scrollTop = 0;
 
     const firstLine = lines[0];
@@ -274,6 +277,7 @@ storyContainer.addEventListener("click", (event) => {
     storyBody.scrollTop = 0;
 
     isTyping = false;
+
     continueButton.classList.remove("hidden");
 });
 
@@ -329,6 +333,7 @@ function goToNextChapter() {
             storyContainer.style.opacity = "";
 
             showChapterChoices();
+
         }, backgroundTransitionTime);
 
     }, 1000);
@@ -338,6 +343,7 @@ function goToNextChapter() {
 function showEnding() {
     clearTimeout(choiceTimer);
     clearInterval(typingTimer);
+
     isTyping = false;
 
     branchChoices.style.display = "none";
@@ -390,63 +396,3 @@ function showEnding() {
 restartButton.addEventListener("click", () => {
     location.reload();
 });
-
-/* 엔딩 선택지 목록 */
-#ending-list {
-    width: fit-content;
-    max-width: 100%;
-    text-align: left;
-}
-
-/* 접히는 항목 */
-.ending-item {
-    margin: 14px 0;
-    color: white;
-    font-family: "BookkLight";
-    font-size: 20px;
-    line-height: 1.8;
-}
-
-/* 화살표와 선택지 */
-.ending-item summary {
-    cursor: pointer;
-    list-style: none;
-    transition: color 0.2s ease;
-}
-
-.ending-item summary::-webkit-details-marker {
-    display: none;
-}
-
-.ending-item summary::before {
-    content: "›";
-    display: inline-block;
-    margin-right: 12px;
-    transition: transform 0.2s ease;
-}
-
-.ending-item[open] summary::before {
-    transform: rotate(90deg);
-}
-
-.ending-item summary:hover {
-    color: #cbd9c2;
-}
-
-/* 펼쳐지는 본문 */
-.ending-story {
-    padding: 12px 0 8px 28px;
-}
-
-.ending-story-heading {
-    margin: 0 0 12px;
-    font-family: "Paperlogy";
-    color: #cbd9c2;
-}
-
-.ending-story-body {
-    margin: 0;
-    white-space: pre-line;
-    word-break: keep-all;
-    overflow-wrap: break-word;
-}
